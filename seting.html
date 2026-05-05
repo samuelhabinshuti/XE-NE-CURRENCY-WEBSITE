@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CURRENCY EXCHANGE WEBSITE - SETTINGS</title>
+
+<style>
+header{
+    background-color: rgb(140, 209, 12);
+    color: black;
+    padding: 10px;
+}
+
+nav{
+    background-color: rgb(43, 232, 229);
+    color: white;
+    padding: 10px;
+}
+
+button{
+    background-color: rgb(243, 19, 194);
+    color: white;
+    padding: 5px;
+}
+
+.box {
+    background: white;
+    padding: 15px;
+    margin: 20px auto;
+    width: 300px;
+    border-radius: 5px;
+}
+.dark body{
+    background-color: black;
+    color: white;
+}
+
+.dark .box{
+    background: #222;
+    color: white;
+}
+</style>
+
+</head>
+
+<body>
+
+<header>
+    <img src="logo.jpg" height="80" width="80">
+    CURRENCY EXCHANGE WEBSITE
+</header>
+
+<nav>
+    <button><a href="home.html">Home page</a></button>
+    &nbsp &nbsp&nbsp&nbsp&nbsp&nbsp
+     &nbsp &nbsp&nbsp&nbsp&nbsp&nbsp
+     &nbsp &nbsp&nbsp&nbsp&nbsp&nbsp
+    <button><a href="full.html">Full Converter page</a></button>
+    &nbsp &nbsp&nbsp&nbsp&nbsp&nbsp
+     &nbsp &nbsp&nbsp&nbsp&nbsp&nbsp
+     &nbsp &nbsp&nbsp&nbsp&nbsp&nbsp
+    <button><a href="currency.html">Currency page</a></button>
+    &nbsp &nbsp&nbsp&nbsp&nbsp&nbsp
+     &nbsp &nbsp&nbsp&nbsp&nbsp&nbsp
+     &nbsp &nbsp&nbsp&nbsp&nbsp&nbsp
+    <button><a href="history.html">History page</a></button>
+    &nbsp &nbsp&nbsp&nbsp&nbsp&nbsp
+     &nbsp &nbsp&nbsp&nbsp&nbsp&nbsp
+     &nbsp &nbsp&nbsp&nbsp&nbsp&nbsp
+    <button><a href="seting.html">Setting page</a></button>
+</nav>
+
+<div class="box">
+
+<h2>Settings</h2>
+
+<label>Language</label>
+<select id="language">
+    <option value="English">English</option>
+    <option value="Kinyarwanda">Kinyarwanda</option>
+    <option value="French">French</option>
+</select>
+
+<br><br>
+
+<label>Default Currency</label>
+<select id="currency">
+    <option value="RWF">RWF</option>
+    <option value="USD">USD</option>
+    <option value="KES">KES</option>
+    <option value="UGX">UGX</option>
+    <option value="CNY">CNY</option>
+</select>
+
+<br><br>
+
+<label>Theme</label>
+<select id="theme" onchange="applyTheme()">
+    <option value="light">Light</option>
+    <option value="dark">Dark</option>
+</select>
+
+<br><br>
+
+<button onclick="saveSettings()">Save Settings</button>
+
+<p id="msg"></p>
+
+</div>
+
+<script>
+function saveSettings(){
+    let language = document.getElementById("language").value;
+    let currency = document.getElementById("currency").value;
+    let theme = document.getElementById("theme").value;
+
+    localStorage.setItem("language", language);
+    localStorage.setItem("currency", currency);
+    localStorage.setItem("theme", theme);
+
+    applyTheme();
+
+    document.getElementById("msg").innerHTML =
+        "Settings saved successfully ✔";
+}
+function applyTheme(){
+    let theme = document.getElementById("theme").value;
+
+    if(theme === "dark"){
+        document.body.style.backgroundColor = "black";
+        document.body.style.color = "white";
+    } else {
+        document.body.style.backgroundColor = "grey";
+        document.body.style.color = "black";
+    }
+}
+window.onload = function(){
+
+    let language = localStorage.getItem("language");
+    let currency = localStorage.getItem("currency");
+    let theme = localStorage.getItem("theme");
+
+    if(language) document.getElementById("language").value = language;
+    if(currency) document.getElementById("currency").value = currency;
+    if(theme) document.getElementById("theme").value = theme;
+
+    applyTheme();
+}
+</script>
+
+<br>
+<button><a href="home.html">Go Back</a></button>
+
+</body>
+</html>

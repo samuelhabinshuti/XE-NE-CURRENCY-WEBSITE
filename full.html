@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CURRENCY EXCHANGE WEBSITE</title>
+
+<style>
+header{
+    background-color: rgb(25, 241, 21);
+    color: rgb(234, 10, 178);
+    padding: 10px;
+}
+
+nav{
+    background-color: rgb(12, 46, 9);
+    padding: 5px;
+}
+
+button{
+    background-color: rgb(243, 19, 194);
+    color: white;
+}
+
+body{
+    background-color: grey;
+    color: black;
+    font-family: Arial;
+}
+
+fieldset{
+    margin: 15px;
+    padding: 15px;
+    border: 2px solid black;
+}
+
+legend{
+    font-weight: bold;
+}
+</style>
+
+</head>
+
+<body>
+
+<header>
+    <img src="logo.jpg" height="80" width="80">
+    CURRENCY EXCHANGE WEBSITE
+</header>
+
+<nav>
+    <button><a href="home.html">Home page</a></button>
+    &nbsp &nbsp&nbsp&nbsp&nbsp&nbsp
+     &nbsp &nbsp&nbsp&nbsp&nbsp&nbsp
+     &nbsp &nbsp&nbsp&nbsp&nbsp&nbsp
+    <button><a href="full.html">Full Converter page</a></button>
+    &nbsp &nbsp&nbsp&nbsp&nbsp&nbsp
+     &nbsp &nbsp&nbsp&nbsp&nbsp&nbsp
+     &nbsp &nbsp&nbsp&nbsp&nbsp&nbsp
+    <button><a href="currency.html">Currency page</a></button>
+    &nbsp &nbsp&nbsp&nbsp&nbsp&nbsp
+     &nbsp &nbsp&nbsp&nbsp&nbsp&nbsp
+     &nbsp &nbsp&nbsp&nbsp&nbsp&nbsp
+    <button><a href="history.html">History page</a></button>
+    &nbsp &nbsp&nbsp&nbsp&nbsp&nbsp
+     &nbsp &nbsp&nbsp&nbsp&nbsp&nbsp
+     &nbsp &nbsp&nbsp&nbsp&nbsp&nbsp
+    <button><a href="seting.html">Setting page</a></button>
+</nav>
+<fieldset>
+<legend>Currency Converter</legend>
+<label>Enter Amount:</label>
+<input type="text" id="amount" placeholder="Type amount here">
+
+<br><br>
+
+<label>From:</label>
+<select id="from">
+    <option value="RWF">Rwanda (RWF)</option>
+    <option value="UGX">Uganda (UGX)</option>
+    <option value="KES">Kenya (KES)</option>
+    <option value="CNY">China (CNY)</option>
+</select>
+
+<br><br>
+
+<label>To:</label>
+<select id="to">
+    <option value="RWF">Rwanda (RWF)</option>
+    <option value="UGX">Uganda (UGX)</option>
+    <option value="KES">Kenya (KES)</option>
+    <option value="CNY">China (CNY)</option>
+</select>
+
+<br><br>
+
+<button onclick="convert()">Convert</button>
+
+<br><br>
+<label>Result:</label>
+<input type="text" id="resultBox" readonly>
+
+</fieldset>
+
+<script>
+function convert() {
+
+    var amount = parseFloat(document.getElementById("amount").value);
+    var from = document.getElementById("from").value;
+    var to = document.getElementById("to").value;
+
+    if (isNaN(amount)) {
+        document.getElementById("resultBox").value = "Enter valid number";
+        return;
+    }
+
+    if (from == "RWF") amount = amount * 1;
+    else if (from == "UGX") amount = amount * 0.37;
+    else if (from == "KES") amount = amount * 11;
+    else if (from == "CNY") amount = amount * 190;
+    var result;
+
+    if (to == "RWF") result = amount;
+    else if (to == "UGX") result = amount / 0.37;
+    else if (to == "KES") result = amount / 11;
+    else if (to == "CNY") result = amount / 190;
+
+    document.getElementById("resultBox").value =
+        result.toFixed(2) + " " + to;
+}
+</script>
+
+</body>
+</html>

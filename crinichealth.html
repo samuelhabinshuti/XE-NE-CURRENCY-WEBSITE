@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Health Clinic System</title>
+    <style>
+        body { margin: 0; font-family: Arial; }
+
+        header {
+            background: #3c5f9c;
+            color: white;
+            padding: 15px;
+            font-size: 28px;
+        }
+
+        nav {
+            background: purple;
+            text-align: center;
+            padding: 10px;
+        }
+
+        nav a {
+            color: yellow;
+            margin: 20px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .container { display: flex; }
+
+        .sidebar {
+            width: 200px;
+            background: #6aa84f;
+            padding: 20px;
+            color: white;
+        }
+
+        .content {
+            flex: 1;
+            background: #5b8db8;
+            padding: 20px;
+        }
+
+        .title {
+            background: lightgray;
+            text-align: center;
+            padding: 10px;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .form-group { margin: 10px 0; }
+
+        label { width: 180px; display: inline-block; }
+
+        input, select {
+            padding: 7px;
+            border-radius: 5px;
+            border: none;
+        }
+
+        button {
+            padding: 10px 15px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .register { background: green; color: white; }
+        .check { background: blue; color: white; }
+
+        table {
+            margin-top: 20px;
+            width: 100%;
+            background: white;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid gray;
+            text-align: center;
+        }
+
+        .waiting { color: orange; }
+        .progress { color: brown; }
+        .done { color: green; }
+
+    </style>
+</head>
+
+<body>
+
+<header>➕ HEALTH CLINIC</header>
+
+<nav>
+    <a href="#">HOME</a>
+    <a href="#">APPOINTMENT</a>
+    <a href="#">PATIENT</a>
+</nav>
+
+<div class="container">
+
+    <div class="sidebar">
+        <p>🏠 Register patient</p>
+        <p>📊 View Queues</p>
+        <p>⚙️ Settings</p>
+    </div>
+
+    <div class="content">
+
+        <div class="title">PATIENT CHECK-IN</div>
+
+        <div class="form-group">
+            <label>Name:</label>
+            <input type="text" id="name">
+        </div>
+
+        <div class="form-group">
+            <label>Age:</label>
+            <input type="number" id="age">
+        </div>
+
+        <div class="form-group">
+            <label>ID:</label>
+            <input type="text" id="id">
+        </div>
+
+        <div class="form-group">
+            <label>Appointment:</label>
+            <select id="type">
+                <option>General</option>
+                <option>Dental</option>
+                <option>Emergency</option>
+            </select>
+        </div>
+
+        <button class="register" onclick="addPatient()">Register</button>
+        <button class="check" onclick="showPatients()">Check Status</button>
+
+        <table id="table">
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>ID</th>
+                <th>Type</th>
+                <th>Status</th>
+            </tr>
+        </table>
+
+    </div>
+
+</div>
+
+<script>
+let patients = [];
+
+function addPatient() {
+    let name = document.getElementById("name").value;
+    let age = document.getElementById("age").value;
+    let id = document.getElementById("id").value;
+    let type = document.getElementById("type").value;
+
+    if(name === "" || age === "" || id === "") {
+        alert("Fill all fields");
+        return;
+    }
+
+    let patient = {
+        name: name,
+        age: age,
+        id: id,
+        type: type,
+        status: "Waiting"
+    };
+
+    patients.push(patient);
+    alert("Patient Registered!");
+}
+
+function showPatients() {
+    let table = document.getElementById("table");
+
+    table.innerHTML = `
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>ID</th>
+            <th>Type</th>
+            <th>Status</th>
+        </tr>
+    `;
+
+    patients.forEach(p => {
+        let colorClass = "waiting";
+
+        if(p.status === "In Progress") colorClass = "progress";
+        if(p.status === "Completed") colorClass = "done";
+
+        table.innerHTML += `
+            <tr>
+                <td>${p.name}</td>
+                <td>${p.age}</td>
+                <td>${p.id}</td>
+                <td>${p.type}</td>
+                <td class="${colorClass}">${p.status}</td>
+            </tr>
+        `;
+    });
+}
+</script>
+
+</body>
+</html>

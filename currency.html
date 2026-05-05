@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CURRENCY EXCHANGE WEBSITEr</title><style>
+            
+            header{
+            background-color: rgb(140, 209, 12);
+            color: rgb(208, 234, 10);
+      }
+        nav{
+            background-color: rgb(4, 8, 4);
+            color: rgb(185, 218, 21);
+            padding: 4px;
+        }
+        button{
+            background-color: rgb(243, 19, 194);
+            color: rgb(32, 241, 46);
+        }
+          body{
+                color:black;
+                background-color: bisque;
+                
+            }
+      
+    </style>
+</head>
+<body><header><img src="logo.jpg" controls height="100" width="100">
+        CURRENCY EXCHANGE WEBSITE
+    </header>
+     <nav>
+     <button> <a href="home.html">home page</a></button>&nbsp
+     &nbsp &nbsp&nbsp&nbsp&nbsp&nbsp
+     &nbsp &nbsp&nbsp&nbsp&nbsp&nbsp
+     &nbsp &nbsp&nbsp&nbsp&nbsp&nbsp
+       <button> <a href="full.html">full converterpage</a></button>&nbsp
+       &nbsp &nbsp&nbsp&nbsp&nbsp&nbsp
+     &nbsp &nbsp&nbsp&nbsp&nbsp&nbsp
+     &nbsp &nbsp&nbsp&nbsp&nbsp&nbsp
+         <button> <a href="currency.html">carrency page</a></button>&nbsp
+         &nbsp &nbsp&nbsp&nbsp&nbsp&nbsp
+     &nbsp &nbsp&nbsp&nbsp&nbsp&nbsp
+     &nbsp &nbsp&nbsp&nbsp&nbsp&nbsp
+           <button> <a href="history.html">history page</a></button>&nbsp
+           &nbsp &nbsp&nbsp&nbsp&nbsp&nbsp
+     &nbsp &nbsp&nbsp&nbsp&nbsp&nbsp
+     &nbsp &nbsp&nbsp&nbsp&nbsp&nbsp
+<button> <a href="seting.html">setting page</a></button>&nbsp
+
+        </nav>
+
+<h2>Selected Currency Info</h2>
+
+<div id="info"></div>
+
+<script>
+var currency = "RWF";
+
+var data = {
+    "RWF": {
+        name: "Rwanda Franc",
+        country: "Rwanda",
+        symbol: "FRw",
+        rate: "1 USD = 1400 RWF"
+    },
+    "UGX": {
+        name: "Uganda Shilling",
+        country: "Uganda",
+        symbol: "USh",
+        rate: "1 USD = 3800 UGX"
+    },
+    "KES": {
+        name: "Kenya Shilling",
+        country: "Kenya",
+        symbol: "KSh",
+        rate: "1 USD = 130 KES"
+    },
+    "CNY": {
+        name: "Chinese Yuan",
+        country: "China",
+        symbol: "¥",
+        rate: "1 USD = 7 CNY"
+    }
+};
+var c = data[currency];
+
+document.getElementById("info").innerHTML =
+    "<p><b>Name:</b> " + c.name + "</p>" +
+    "<p><b>Country:</b> " + c.country + "</p>" +
+    "<p><b>Symbol:</b> " + c.symbol + "</p>" +
+    "<p><b>Example Rate:</b> " + c.rate + "</p>";
+</script><h3>Exchange Rate</h3>
+
+<label>From:</label>
+<select id="from">
+    <option value="RWF">RWF</option>
+    <option value="UGX">UGX</option>
+    <option value="KES">KES</option>
+    <option value="CNY">CNY</option>
+</select>
+
+<label>To:</label>
+<select id="to">
+    <option value="RWF">RWF</option>
+    <option value="UGX">UGX</option>
+    <option value="KES">KES</option>
+    <option value="CNY">CNY</option>
+</select>
+
+<button onclick="showRate()">Show Rate</button>
+
+<p id="rate"></p>
+
+<script>
+function showRate() {
+    var from = document.getElementById("from").value;
+    var to = document.getElementById("to").value;
+
+    var rates = {
+        "RWF": 1,
+        "UGX": 0.37,
+        "KES": 11,
+        "CNY": 190
+    };
+    var result = (1 * rates[from]) / rates[to];
+
+    document.getElementById("rate").innerHTML =
+        "1 " + from + " = " + result.toFixed(4) + " " + to;
+}
+</script><h3>Comparison with Other Currencies</h3>
+
+<select id="currency" onchange="showComparison()">
+    <option value="RWF">Rwanda (RWF)</option>
+    <option value="UGX">Uganda (UGX)</option>
+    <option value="KES">Kenya (KES)</option>
+    <option value="CNY">China (CNY)</option>
+</select>
+
+<p id="result"></p>
+
+<script>
+function showComparison() {
+
+    var c = document.getElementById("currency").value;
+    var text = "";
+
+    if (c == "RWF") {
+        text = "1 RWF = 0.37 UGX, 0.09 KES, 0.005 CNY";
+    }
+    else if (c == "UGX") {
+        text = "1 UGX = 2.7 RWF, 0.03 KES, 0.002 CNY";
+    }
+    else if (c == "KES") {
+        text = "1 KES = 11 RWF, 3 UGX, 0.05 CNY";
+    }
+    else if (c == "CNY") {
+        text = "1 CNY = 190 RWF, 500 UGX, 20 KES";
+    }
+
+    document.getElementById("result").innerHTML = text;
+}
+</script>
+<button> <a href="history.html">continue</a></button>
+</body>
+</html>
+        
